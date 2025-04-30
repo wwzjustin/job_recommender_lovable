@@ -2,7 +2,14 @@
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
+import { 
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -34,11 +41,44 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     }
   };
 
+  const navigationItems = [
+    { path: "/", label: "Dashboard", color: "bg-info-light text-info" },
+    { path: "/profile", label: "Profile", color: "bg-success-light text-success" },
+    { path: "/applications", label: "Applications", color: "bg-warning-light text-warning" },
+    { path: "/jobs", label: "Jobs", color: "bg-info-light text-info" },
+    { path: "/company", label: "Company", color: "bg-success-light text-success" },
+  ];
+
   return (
     <div className="flex min-h-screen bg-gray-50">
       <Sidebar isOpen={sidebarOpen} />
       <div className="flex flex-col flex-1 overflow-hidden">
         <Navbar toggleSidebar={toggleSidebar} />
+        
+        {/* Horizontal Navigation Menu */}
+        <div className="bg-white border-b border-gray-200 px-6 py-2">
+          <NavigationMenu className="mx-auto">
+            <NavigationMenuList className="space-x-2">
+              {navigationItems.map((item) => (
+                <NavigationMenuItem key={item.path}>
+                  <Link 
+                    to={item.path}
+                    className={cn(
+                      "block px-4 py-1.5 rounded-md text-sm font-medium transition-colors",
+                      location.pathname === item.path 
+                        ? `${item.color} animate-fade-in` 
+                        : "text-gray-600 hover:bg-gray-100"
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                </NavigationMenuItem>
+              ))}
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+        
+        {/* Page title and description */}
         <div className="bg-white border-b border-gray-200 px-6 py-4">
           <div className="flex justify-between items-center">
             <div>
@@ -52,23 +92,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 {location.pathname === "/jobs" && "Discover new job opportunities"}
                 {location.pathname === "/company" && "Recruitment and candidate management"}
               </p>
-            </div>
-            <div className="flex items-center space-x-2 animate-fade-in">
-              {location.pathname === "/" && (
-                <span className="status-pill bg-info-light text-info">Dashboard</span>
-              )}
-              {location.pathname === "/profile" && (
-                <span className="status-pill bg-success-light text-success">Profile</span>
-              )}
-              {location.pathname === "/applications" && (
-                <span className="status-pill bg-warning-light text-warning">Applications</span>
-              )}
-              {location.pathname === "/jobs" && (
-                <span className="status-pill bg-info-light text-info">Jobs</span>
-              )}
-              {location.pathname === "/company" && (
-                <span className="status-pill bg-success-light text-success">Company</span>
-              )}
             </div>
           </div>
         </div>
