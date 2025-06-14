@@ -9,7 +9,6 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Applications from "./pages/Applications";
 import Jobs from "./pages/Jobs";
-import Company from "./pages/Company";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,7 +25,6 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/applications" element={<Applications />} />
             <Route path="/jobs" element={<Jobs />} />
-            <Route path="/company" element={<Company />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </MainLayout>

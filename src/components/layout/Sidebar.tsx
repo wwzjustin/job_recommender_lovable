@@ -1,14 +1,11 @@
-
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { 
   User, 
   Briefcase, 
   Search, 
-  Building2, 
   FileText, 
-  Settings,
-  ChevronLeft
+  Settings
 } from "lucide-react";
 
 interface SidebarProps {
@@ -23,7 +20,6 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     { name: "My Profile", href: "/profile", icon: <User className="h-5 w-5" /> },
     { name: "Jobs Applied", href: "/applications", icon: <Briefcase className="h-5 w-5" /> },
     { name: "Job Openings", href: "/jobs", icon: <Search className="h-5 w-5" /> },
-    { name: "Company View", href: "/company", icon: <Building2 className="h-5 w-5" /> },
     { name: "Settings", href: "/settings", icon: <Settings className="h-5 w-5" /> },
   ];
 

@@ -34,8 +34,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         return "Applications";
       case "/jobs":
         return "Job Openings";
-      case "/company":
-        return "Company";
       default:
         return "Dashboard";
     }
@@ -46,7 +44,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     { path: "/profile", label: "Profile", color: "bg-success-light text-success" },
     { path: "/applications", label: "Applications", color: "bg-warning-light text-warning" },
     { path: "/jobs", label: "Jobs", color: "bg-info-light text-info" },
-    { path: "/company", label: "Company", color: "bg-success-light text-success" },
   ];
 
   return (
