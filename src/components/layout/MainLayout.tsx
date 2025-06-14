@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
@@ -26,7 +25,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   // Function to get appropriate page title based on current route
   const getPageTitle = (path: string) => {
     switch (path) {
-      case "/":
+      case "/dashboard":
         return "Dashboard";
       case "/profile":
         return "Profile";
@@ -40,7 +39,7 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   };
 
   const navigationItems = [
-    { path: "/", label: "Dashboard", color: "bg-info-light text-info" },
+    { path: "/dashboard", label: "Dashboard", color: "bg-info-light text-info" },
     { path: "/profile", label: "Profile", color: "bg-success-light text-success" },
     { path: "/applications", label: "Applications", color: "bg-warning-light text-warning" },
     { path: "/jobs", label: "Jobs", color: "bg-info-light text-info" },

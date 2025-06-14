@@ -16,7 +16,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const location = useLocation();
   
   const links = [
-    { name: "Dashboard", href: "/", icon: <FileText className="h-5 w-5" /> },
+    { name: "Dashboard", href: "/dashboard", icon: <FileText className="h-5 w-5" /> },
     { name: "My Profile", href: "/profile", icon: <User className="h-5 w-5" /> },
     { name: "Jobs Applied", href: "/applications", icon: <Briefcase className="h-5 w-5" /> },
     { name: "Job Openings", href: "/jobs", icon: <Search className="h-5 w-5" /> },
