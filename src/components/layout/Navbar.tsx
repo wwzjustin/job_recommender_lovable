@@ -1,4 +1,3 @@
-
 import { Bell, Menu, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,9 +37,6 @@ export const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
           </Button>
           <Button variant="ghost" size="icon">
             <MessageSquare className="h-5 w-5" />
-          </Button>
-          <Button variant="default">
-            Quick Apply
           </Button>
         </div>
       </div>
