@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Applications from "./pages/Applications";
 import Jobs from "./pages/Jobs";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Landing from "./pages/Landing";
 
@@ -39,6 +41,11 @@ const App = () => (
           <Route path="/jobs" element={
             <MainLayout>
               <Jobs />
+            </MainLayout>
+          } />
+          <Route path="/settings" element={
+            <MainLayout>
+              <Settings />
             </MainLayout>
           } />
           <Route path="*" element={<NotFound />} />
