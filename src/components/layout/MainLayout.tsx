@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
@@ -78,23 +77,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
           </NavigationMenu>
         </div>
         
-        {/* Page title and description */}
-        <div className="bg-white border-b border-gray-200 px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-xl font-semibold text-gray-900">
-                {getPageTitle(location.pathname)}
-              </h1>
-              <p className="text-sm text-gray-500 mt-1">
-                {location.pathname === "/" && "Welcome to your job application dashboard"}
-                {location.pathname === "/profile" && "Manage your professional profile"}
-                {location.pathname === "/applications" && "Track your job applications"}
-                {location.pathname === "/jobs" && "Discover new job opportunities"}
-                {location.pathname === "/company" && "Recruitment and candidate management"}
-              </p>
-            </div>
-          </div>
-        </div>
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
           {children}
         </main>
