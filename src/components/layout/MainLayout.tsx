@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { Navbar } from "./Navbar";
@@ -53,29 +54,6 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Sidebar isOpen={sidebarOpen} />
       <div className="flex flex-col flex-1 overflow-hidden">
         <Navbar toggleSidebar={toggleSidebar} />
-        
-        {/* Horizontal Navigation Menu */}
-        <div className="bg-white border-b border-gray-200 px-6 py-2">
-          <NavigationMenu className="mx-auto">
-            <NavigationMenuList className="space-x-2">
-              {navigationItems.map((item) => (
-                <NavigationMenuItem key={item.path}>
-                  <Link 
-                    to={item.path}
-                    className={cn(
-                      "block px-4 py-1.5 rounded-md text-sm font-medium transition-colors",
-                      location.pathname === item.path 
-                        ? `${item.color} animate-fade-in` 
-                        : "text-gray-600 hover:bg-gray-100"
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-        </div>
         
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
           {children}
