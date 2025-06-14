@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +6,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
+import { ApplicationPackageModal } from "@/components/job/ApplicationPackageModal";
+import { useApplicationBuilder } from "@/hooks/useApplicationBuilder";
+import { useToast } from "@/hooks/use-toast";
 import {
   Search,
   MapPin,
@@ -24,6 +26,51 @@ import {
 
 export const Jobs = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<any>(null);
+  const [isApplicationModalOpen, setIsApplicationModalOpen] = useState(false);
+  const { toast } = useToast();
+  
+  const { isGenerating, applicationPackage, generateApplicationPackage, resetPackage } = useApplicationBuilder();
+
+  const handleApplyNow = async (job: any) => {
+    setSelectedJob(job);
+    setIsApplicationModalOpen(true);
+    
+    try {
+      await generateApplicationPackage({
+        id: job.id,
+        title: job.title,
+        company: job.company,
+        location: job.location,
+        description: job.description,
+        skills: job.skills,
+        salary: job.salary
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to generate application package. Please try again.",
+        variant: "destructive"
+      });
+      setIsApplicationModalOpen(false);
+    }
+  };
+
+  const handleSubmitApplication = () => {
+    toast({
+      title: "Application Submitted!",
+      description: `Your application for ${selectedJob?.title} at ${selectedJob?.company} has been submitted successfully.`,
+    });
+    setIsApplicationModalOpen(false);
+    resetPackage();
+    setSelectedJob(null);
+  };
+
+  const handleCloseModal = () => {
+    setIsApplicationModalOpen(false);
+    resetPackage();
+    setSelectedJob(null);
+  };
 
   const jobListings = [
     {
@@ -287,7 +334,7 @@ export const Jobs = () => {
             </TabsList>
             <TabsContent value="recommended" className="space-y-4">
               {jobListings.map((job) => (
-                <JobCard key={job.id} job={job} />
+                <JobCard key={job.id} job={job} onApplyNow={handleApplyNow} />
               ))}
             </TabsContent>
             <TabsContent value="recent">
@@ -310,11 +357,21 @@ export const Jobs = () => {
           </Tabs>
         </div>
       </div>
+
+      <ApplicationPackageModal
+        isOpen={isApplicationModalOpen}
+        onClose={handleCloseModal}
+        applicationPackage={applicationPackage}
+        jobTitle={selectedJob?.title || ""}
+        companyName={selectedJob?.company || ""}
+        isGenerating={isGenerating}
+        onSubmit={handleSubmitApplication}
+      />
     </div>
   );
 };
 
-const JobCard = ({ job }: { job: any }) => {
+const JobCard = ({ job, onApplyNow }: { job: any; onApplyNow?: (job: any) => void }) => {
   const [saved, setSaved] = useState(false);
 
   return (
@@ -375,7 +432,9 @@ const JobCard = ({ job }: { job: any }) => {
               <Button variant="outline" size="sm">
                 Save
               </Button>
-              <Button size="sm">Apply Now</Button>
+              <Button size="sm" onClick={() => onApplyNow?.(job)}>
+                Apply Now
+              </Button>
             </div>
           </div>
         </div>
